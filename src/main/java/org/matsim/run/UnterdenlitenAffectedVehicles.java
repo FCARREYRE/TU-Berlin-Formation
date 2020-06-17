@@ -24,8 +24,8 @@ import java.util.List;
 
 public class UnterdenlitenAffectedVehicles {
     public static void main(String[] args) throws IOException {
-//        String inputFile = "output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = "output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager =  EventsUtils.createEventsManager();
 
@@ -95,7 +95,7 @@ public class UnterdenlitenAffectedVehicles {
                     if(!affectedVehicles.contains(strVehiculeID)){
                         affectedVehicles.add(strVehiculeID);
                         try {
-                            BufferedWriter writer = new BufferedWriter(new FileWriter("output_original_run/affectedVehicles.txt", true));
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedVehicles.txt", true));
                             writer.append(strVehiculeID + "\n");
                             writer.close();
                         } catch (IOException e) {

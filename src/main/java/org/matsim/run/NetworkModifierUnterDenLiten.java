@@ -21,8 +21,8 @@ public class NetworkModifierUnterDenLiten {
     public static void main(String[] args) throws FileNotFoundException {
 
         //fichiers d'input et d'output
-        Path inputNetwork = Paths.get("output_dm/berlin-v5.5-1pct.output_network.xml.gz");
-        Path outputNetwork = Paths.get("output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+        Path inputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_network.xml.gz");
+        Path outputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
 
         //Création du network
         Network network = NetworkUtils.createNetwork();

@@ -28,8 +28,8 @@ import java.util.Map;
 
 public class UnterdenlitenAlternativeAxis{
     public static void main(String[] args) throws IOException {
-//        String inputFile = "output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = "output_dm1n/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1n/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager =  EventsUtils.createEventsManager();
 
@@ -98,7 +98,7 @@ public class UnterdenlitenAlternativeAxis{
                 System.out.println(strEntries+ "\n");
                 try {
 //
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("output_dm1/number_of_entries.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/number_of_entries.txt", true));
                     writer.append((strEntries + "\n"));
                     writer.close();
                 } catch (IOException e) {

@@ -84,16 +84,20 @@ public final class RunBerlinScenario {
 		}
 
 		Config config = prepareConfig( args ) ;
-		config.controler().setLastIteration(1);
+		config.controler().setLastIteration(0);
 		config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
-		config.controler().setOutputDirectory("output_original_run");
+		config.controler().setOutputDirectory(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run_a_supprimer");
 
 		//modification du réseau :
-		String inputNetworkName = "output_dm/berlin-v5.5-1pct.output_network.xml.gz";
-		String outputNetworkName = "output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz";
+		String inputNetworkName = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_network.xml.gz";
+		String outputNetworkName = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz";
 		String linkToModify = "scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv";
 		NetworkModifier.networkModifier(inputNetworkName, outputNetworkName, linkToModify );
-		config.network().setInputFile("output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+//		config.network().setInputFile(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+//		config.network().setInputFile("C:/Users/marco/IdeaProjects/output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+//		System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
+		config.network().setInputFile(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+
 
 		Scenario scenario = prepareScenario( config ) ;
 		Controler controler = prepareControler( scenario ) ;
