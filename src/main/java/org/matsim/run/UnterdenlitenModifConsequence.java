@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class UnterdenlitenModifConsequence {
     public static void main(String[] args) throws IOException {
-        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
-//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager = EventsUtils.createEventsManager();
 
@@ -49,7 +49,7 @@ public class UnterdenlitenModifConsequence {
 
         public List<String> getPersonsToWatch() throws IOException {
             //extraction des personnes à surveiller
-            String affectedPersons = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedPerson.txt";
+            String affectedPersons = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/affectedPerson.txt";
 
             String file = affectedPersons; //nom du fichier csv à lire
             FileReader fr = new FileReader(file);
@@ -103,8 +103,8 @@ public class UnterdenlitenModifConsequence {
 
             for(Map.Entry<Id<Person>, Double> element : travelTimeByPersonMap.entrySet()){
                 try {
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/travelTimeByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/travelTimeByPerson.txt", true));
+//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/travelTimeByPerson.txt", true));
                     writer.append(element.getKey() + ";" + element.getValue() + "\n");
                     writer.close();
                 } catch (IOException e) {

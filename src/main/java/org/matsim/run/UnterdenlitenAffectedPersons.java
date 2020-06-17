@@ -26,8 +26,8 @@ import java.util.List;
 
 public class UnterdenlitenAffectedPersons {
     public static void main(String[] args) throws IOException {
-//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager =  EventsUtils.createEventsManager();
 
@@ -51,7 +51,7 @@ public class UnterdenlitenAffectedPersons {
 
         public List<String> getVehiclesToWatch() throws IOException {
             //extraction des véhicules à surveiller
-            String affectedVehicles = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedVehicles.txt";
+            String affectedVehicles = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/affectedVehicles.txt";
 
             String file = affectedVehicles ; //nom du fichier csv à lire
             FileReader fr = new FileReader(file);
@@ -85,7 +85,7 @@ public class UnterdenlitenAffectedPersons {
                     if(!affectedPersons.contains(strPersonId)){
                         affectedPersons.add(strPersonId);
                         try {
-                            BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedPerson.txt", true));
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/affectedPerson.txt", true));
                             writer.append(strPersonId + "\n");
                             writer.close();
                         } catch (IOException e) {

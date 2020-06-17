@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class UnterdenlitenHome {
     public static void main(String[] args) throws IOException {
-//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager = EventsUtils.createEventsManager();
 
@@ -51,7 +51,7 @@ public class UnterdenlitenHome {
 
         public List<String> getPersonsToWatch() throws IOException {
             //extraction des personnes à surveiller
-            String affectedPersons = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedPerson.txt";
+            String affectedPersons = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/affectedPerson.txt";
 
             String file = affectedPersons; //nom du fichier csv à lire
             FileReader fr = new FileReader(file);
@@ -95,8 +95,8 @@ public class UnterdenlitenHome {
 
             for(Id<Link> id:homeLocations){
                 try {
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/travelTimeByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/homelocations.txt", true));
+//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/homelocations.txt", true));
                     writer.append(id.toString() + "\n");
                     writer.close();
                     System.out.println(id.toString() + "ajouté au fichier");

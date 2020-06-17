@@ -30,8 +30,8 @@ import java.util.Map;
 
 public class UnterdenlitenDistanceTravelled{
     public static void main(String[] args) throws IOException {
-        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
-//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager = EventsUtils.createEventsManager();
 
@@ -54,7 +54,7 @@ public class UnterdenlitenDistanceTravelled{
         private Network network;
 
         private BerlinEventHandler() throws IOException {
-            Path inputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_network.xml.gz");
+            Path inputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm/berlin-v5.5-1pct.output_network.xml.gz");
             network = NetworkUtils.createNetwork();
             new MatsimNetworkReader(network).readFile(inputNetwork.toString());
 
@@ -63,7 +63,7 @@ public class UnterdenlitenDistanceTravelled{
 
         public List<String> getVehiclesToWatch() throws IOException {
             //extraction des véhicules à surveiller
-            String affectedVehicles = Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/affectedVehicles.txt";
+            String affectedVehicles = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/affectedVehicles.txt";
 
             String file = affectedVehicles ; //nom du fichier csv à lire
             FileReader fr = new FileReader(file);
@@ -83,7 +83,7 @@ public class UnterdenlitenDistanceTravelled{
 
         //Network pour récupérer les links
 
-        private static Path inputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm/berlin-v5.5-1pct.output_network.xml.gz");
+        private static Path inputNetwork = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm/berlin-v5.5-1pct.output_network.xml.gz");
 //        Config config;
 //        String strInputNetwork = inputNetwork.toString();
 //        Scenario scenario = ScenarioUtils.createScenario(config);
@@ -123,8 +123,8 @@ public class UnterdenlitenDistanceTravelled{
 
             for(Map.Entry<Id<Vehicle>, Double> element : travelledDistanceByPerson.entrySet()){
                 try {
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_original_run/travelDistanceByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"output_dm1/travelDistanceByPerson.txt", true));
+//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelDistanceByPerson.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/travelDistanceByPerson.txt", true));
                     writer.append(element.getKey() + ";" + element.getValue() + "\n");
                     writer.close();
                 } catch (IOException e) {
