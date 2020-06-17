@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class UnterdenlitenModifConsequence {
     public static void main(String[] args) throws IOException {
-        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
-//        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = "output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = "output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager = EventsUtils.createEventsManager();
 
@@ -49,7 +49,7 @@ public class UnterdenlitenModifConsequence {
 
         public List<String> getPersonsToWatch() throws IOException {
             //extraction des personnes à surveiller
-            String affectedPersons = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_original_run/affectedPerson.txt";
+            String affectedPersons = "output_original_run/affectedPerson.txt";
 
             String file = affectedPersons; //nom du fichier csv à lire
             FileReader fr = new FileReader(file);

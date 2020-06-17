@@ -24,8 +24,8 @@ import java.util.List;
 
 public class UnterdenlitenAffectedVehicles {
     public static void main(String[] args) throws IOException {
-//        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = "output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = "output_original_run/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager =  EventsUtils.createEventsManager();
 
@@ -53,7 +53,7 @@ public class UnterdenlitenAffectedVehicles {
 
         public List<String> getLinksToModify() throws IOException {
                 //extraction des liens à surveiller
-                String linkToModify = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv";
+                String linkToModify = "scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv";
 
                 String file = linkToModify ; //nom du fichier csv à lire
                 FileReader fr = new FileReader(file);

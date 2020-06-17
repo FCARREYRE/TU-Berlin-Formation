@@ -89,11 +89,11 @@ public final class RunBerlinScenario {
 		config.controler().setOutputDirectory("output_original_run");
 
 		//modification du réseau :
-		String inputNetworkName = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm/berlin-v5.5-1pct.output_network.xml.gz";
-		String outputNetworkName = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz";
-		String linkToModify = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv";
+		String inputNetworkName = "output_dm/berlin-v5.5-1pct.output_network.xml.gz";
+		String outputNetworkName = "output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz";
+		String linkToModify = "scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv";
 		NetworkModifier.networkModifier(inputNetworkName, outputNetworkName, linkToModify );
-		config.network().setInputFile("C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+		config.network().setInputFile("output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
 
 		Scenario scenario = prepareScenario( config ) ;
 		Controler controler = prepareControler( scenario ) ;

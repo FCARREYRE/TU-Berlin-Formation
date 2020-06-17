@@ -28,8 +28,8 @@ import java.util.Map;
 
 public class UnterdenlitenAlternativeAxis{
     public static void main(String[] args) throws IOException {
-//        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm1n/berlin-v5.5-1pct.output_events.xml.gz";
+//        String inputFile = "output_dm3/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = "output_dm1n/berlin-v5.5-1pct.output_events.xml.gz";
 
         EventsManager eventsManager =  EventsUtils.createEventsManager();
 

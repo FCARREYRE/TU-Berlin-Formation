@@ -21,8 +21,8 @@ public class NetworkModifierUnterDenLiten {
     public static void main(String[] args) throws FileNotFoundException {
 
         //fichiers d'input et d'output
-        Path inputNetwork = Paths.get("C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm/berlin-v5.5-1pct.output_network.xml.gz");
-        Path outputNetwork = Paths.get("C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
+        Path inputNetwork = Paths.get("output_dm/berlin-v5.5-1pct.output_network.xml.gz");
+        Path outputNetwork = Paths.get("output_dm/berlin-v5.5-1pct.output_networkmodified.xml.gz");
 
         //Création du network
         Network network = NetworkUtils.createNetwork();
@@ -37,7 +37,7 @@ public class NetworkModifierUnterDenLiten {
 
         //extraction du fichier excel et mise dans une liste
         List<String> result = new ArrayList<String>();
-        String file = "C:/Users/marco/IdeaProjects/matsim-berlin-5.5.x/scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv"; //nom du fichier csv à lire
+        String file = "scenarios/berlin-v5.5-1pct/output-berlin-v5.5-1pct/unterlinks.csv"; //nom du fichier csv à lire
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
 
