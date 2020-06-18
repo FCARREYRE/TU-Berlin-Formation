@@ -1,4 +1,4 @@
-package org.matsim.codeexamples.events.eventsHandling;
+package org.matsim.analysis;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class CongestionDetectionEventHandler implements LinkEnterEventHandler,
 
 	@Override
 	public void handleEvent(LinkLeaveEvent event) {
-		double excessTravelTime = event.getTime() - this.earliestLinkExitTime.get( event.getVehicleId() ) ; 
+		double excessTravelTime = event.getTime() - this.earliestLinkExitTime.get(event.getVehicleId());
 		System.out.println( "excess travel time: " + excessTravelTime ) ;
 	}
 

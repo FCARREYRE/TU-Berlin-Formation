@@ -124,7 +124,7 @@ public class UnterdenlitenDistanceTravelled{
             for(Map.Entry<Id<Vehicle>, Double> element : travelledDistanceByPerson.entrySet()){
                 try {
 //                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelDistanceByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/travelDistanceByPerson.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/travelDistanceByPerson_test.txt", true));
                     writer.append(element.getKey() + ";" + element.getValue() + "\n");
                     writer.close();
                 } catch (IOException e) {
