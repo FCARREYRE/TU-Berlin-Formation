@@ -61,7 +61,8 @@ public class UnterdenlitenCongestion {
         }
 
         public void handleEvent(LinkEnterEvent event){
-            System.out.println("LinkEnterEvent détecté véhicule n°" + event.getVehicleId());
+            System.out.println("LinkEnterEvent détecté véhicule n°" + event.getVehicleId()
+                    + "sur le link n°"+ event.getLinkId());
             Link link = network.getLinks().get( event.getLinkId() ) ;
             double linkTravelTime = link.getLength() / link.getFreespeed( event.getTime() );
             this.earliestLinkExitTime.put( event.getVehicleId(), event.getTime() + linkTravelTime );
@@ -70,7 +71,8 @@ public class UnterdenlitenCongestion {
         }
 
         public void handleEvent(LinkLeaveEvent event){
-            System.out.println("LinkLeaveEvent détecté véhicule n°"+ event.getVehicleId());
+            System.out.println("LinkLeaveEvent détecté véhicule n°"+ event.getVehicleId()
+                    + "sur le link n°"+ event.getLinkId());
             double leaveTime = event.getTime();
             Id<Vehicle> vehicleId = event.getVehicleId();
             try {
