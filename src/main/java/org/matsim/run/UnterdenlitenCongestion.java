@@ -12,6 +12,7 @@ import org.matsim.core.events.MatsimEventsReader;
 import org.matsim.core.events.algorithms.Vehicle2DriverEventHandler;
 import org.matsim.core.network.NetworkUtils;
 import org.matsim.core.network.io.MatsimNetworkReader;
+import org.matsim.core.network.io.NetworkWriter;
 import org.matsim.core.scoring.PersonExperiencedActivity;
 import org.matsim.vehicles.Vehicle;
 
@@ -43,10 +44,20 @@ public class UnterdenlitenCongestion {
         MatsimEventsReader eventsReader = new MatsimEventsReader(eventsManager);
         eventsReader.readFile(inputFile);
 
+        BerlinEventHandler.addCongestionAttribute(network);
+
+        Path outputNetwork = Paths.get(
+                Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_networkmodified_with_congestion.xml.gz");
+
+        new NetworkWriter(network).write(outputNetwork.toString());
+
+
         BerlinEventHandler.fileWriter();
 
 
     }
+
+
 
     private static class BerlinEventHandler implements LinkEnterEventHandler,
             LinkLeaveEventHandler{
@@ -55,6 +66,7 @@ public class UnterdenlitenCongestion {
         private Network network;
         private static Map<Id<Vehicle>, Double> timeLostByVehicle = new HashMap<>();
         private static Map<Id<Link>, Double> timeLostByLink = new HashMap<>();
+        private static Map<Id<Link>, Integer> enterEventCounter = new HashMap<>();
 
 
         public BerlinEventHandler( Network network ) {
@@ -69,6 +81,12 @@ public class UnterdenlitenCongestion {
             this.earliestLinkExitTime.put( event.getVehicleId(), event.getTime() + linkTravelTime );
 //            System.out.println("Temps de trajet min prévu: " + earliestLinkExitTime);
 
+            Id<Link> linkId = event.getLinkId();
+            if(enterEventCounter.putIfAbsent(linkId, 1) != null){
+                enterEventCounter.put(linkId, enterEventCounter.get(linkId)+1);
+//                System.out.println(enterEventCounter);
+            }
+
         }
 
         public void handleEvent(LinkLeaveEvent event){
@@ -80,6 +98,7 @@ public class UnterdenlitenCongestion {
             try {
                 double excessTravelTime = leaveTime - this.earliestLinkExitTime.get(vehicleId);
 //                System.out.println("excess travel time: " + excessTravelTime);
+
                 if(timeLostByVehicle.putIfAbsent(vehicleId, excessTravelTime) != null){
                     timeLostByVehicle.put(vehicleId, timeLostByVehicle.get(vehicleId)+excessTravelTime);
                 }
@@ -92,33 +111,46 @@ public class UnterdenlitenCongestion {
 
         }
 
-        public static void fileWriter(){
-            System.out.println(timeLostByLink);
-            System.out.println(timeLostByVehicle);
+        public static void fileWriter() throws IOException {
+//            System.out.println(timeLostByLink);
+//            System.out.println(timeLostByVehicle);
 
+//          BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
+            BufferedWriter writerLink = new BufferedWriter(new FileWriter(
+                    Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/timeLostByLink.txt", true));
             for(Map.Entry<Id<Link>, Double> element : timeLostByLink.entrySet()){
                 try {
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(
-                            Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/timeLostByLink.txt", true));
-                    writer.append(element.getKey() + ";" + element.getValue() + "\n");
-                    writer.close();
+                    writerLink.append(element.getKey() + ";" + element.getValue() + ";" + enterEventCounter.get(element.getKey()) + "\n");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            writerLink.close();
 
+//          BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
+            BufferedWriter writerVehicle = new BufferedWriter(new FileWriter(
+                    Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/timeLostByVehicle.txt", true));
             for(Map.Entry<Id<Vehicle>, Double> element : timeLostByVehicle.entrySet()){
                 try {
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run/travelTimeByPerson.txt", true));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(
-                            Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/timeLostByVehicle.txt", true));
-                    writer.append(element.getKey() + ";" + element.getValue() + "\n");
-                    writer.close();
+                    writerVehicle.append(element.getKey() + ";" + element.getValue() + "\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            writerVehicle.close();
+        }
+
+        public static void addCongestionAttribute(Network network){
+            for(Map.Entry<Id<Link>, Double> element : timeLostByLink.entrySet()){
+                Link linkToModify = network.getLinks().get(element.getKey());
+                linkToModify.getAttributes().putAttribute("congestionTime", element.getValue());
+                linkToModify.getAttributes().putAttribute("congestionTimeByPerson",
+                        element.getValue()/((double)enterEventCounter.get(element.getKey())));
+            }
+
+
+
         }
 
 
