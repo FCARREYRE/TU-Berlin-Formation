@@ -27,7 +27,7 @@ import java.util.*;
 public class UnterdenlitenCongestion {
     public static void main(String[] args) throws IOException {
 //        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
-        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString() + "/output_dm1/berlin-v5.5-1pct.output_events.xml.gz";
+        String inputFile = Paths.get(".").toAbsolutePath().normalize().toString() + "/output_original_run_30it/berlin-v5.5-1pct.output_events.xml.gz";
 
         //création du network
         Network network;
@@ -47,7 +47,7 @@ public class UnterdenlitenCongestion {
         BerlinEventHandler.addCongestionAttribute(network);
 
         Path outputNetwork = Paths.get(
-                Paths.get(".").toAbsolutePath().normalize().toString()+"/output_dm1/berlin-v5.5-1pct.output_networkmodified_with_congestion.xml.gz");
+                Paths.get(".").toAbsolutePath().normalize().toString()+"/output_original_run_30it/berlin-v5.5-1pct.output_networkmodified_with_congestion.xml.gz");
 
         new NetworkWriter(network).write(outputNetwork.toString());
 
@@ -106,7 +106,7 @@ public class UnterdenlitenCongestion {
                     timeLostByLink.put(linkId, timeLostByLink.get(linkId)+excessTravelTime);
                 }
             }catch (Exception e){
-                System.out.println("Départ du véhicule n°" + vehicleId);
+//                System.out.println("Départ du véhicule n°" + vehicleId);
             }
 
         }
